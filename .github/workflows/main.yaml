@@ -19,6 +19,6 @@ jobs:
       - name: deploy
         run: 
           sshpass -e ssh -o stricthostkeychecking=no ${{ secrets.APP_USER }}@${{secrets.APP_HOST}}
-          "cd /var/www/contact-form"
+          "cd /var/www/contact-form &&
           git pull &&
-          composer install
+          composer install"
