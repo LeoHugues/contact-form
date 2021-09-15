@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      SSHPASS: ${{ secrets.APP_SSH }}
+      SSHPASS: ${{ secrets.APP_PASS }}
     
     steps:
       - uses: actions/checkout@v2
