@@ -10,16 +10,56 @@ jobs:
       SSHPASS: ${{ secrets.APP_PASS }}
     
     steps:
+      # —— Setup Github actions 🐙 —————————————————————————————————————————————
       - uses: actions/checkout@v2
 
-      - name: Setup PHP Action
-        uses: shivammathur/setup-php@2.14.0
-        run:
-          php bin/phpunit --testdox
-        
       - name:  APT UPDATE and INSTALL SSHPASS
         run:
             sudo apt update && sudo apt install sshpass
+
+      - name: Setup PHP, extensions and composer with shivammathur/setup-php
+        uses: shivammathur/setup-php@2.14.0
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions:  mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring, pdo
+          tools: phpunit
+
+      # —— Composer 🧙‍️ —————————————————————————————————————————————————————————
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install
+
+      # —— Symfony 🎵 ——————————————————————————————————————————————————————————
+      - name: Check Symfony requirements
+        run: vendor/bin/requirements-checker
+
+      - name: Check the Symfony console
+        run: |
+          bin/console about
+
+      ## —— Coding standards ✨ ————————————————————————————————————————————————
+      - name: Coding standards checks (php_codesniffer + php-cs-fixer)
+        run: make cs
+        if: matrix.php-versions == '7.4'
+      
+      ## —— Tests ✅ ———————————————————————————————————————————————————————————
+      - name: UNIT TESTS
+        run:
+          bin/phpunit --testdox
+
 
       - name: deploy
         run: 
