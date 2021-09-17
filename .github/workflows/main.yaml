@@ -79,6 +79,6 @@ jobs:
           sshpass -e ssh -o stricthostkeychecking=no ${{ secrets.APP_USER }}@${{secrets.APP_HOST}}
           "cd /var/www/contact-form &&
           git pull &&
-          composer install
-          npm install
+          composer install &&
+          npm install &&
           npm run build"
