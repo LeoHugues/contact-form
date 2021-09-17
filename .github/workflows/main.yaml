@@ -22,7 +22,7 @@ jobs:
         with:
           php-version: '7.4'
           extensions:  mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring, pdo
-          tools: phpunit
+          tools: phpunit, symfony, symfony-cli
 
       # —— Composer 🧙‍️ —————————————————————————————————————————————————————————
       - name: Validate composer.json and composer.lock
@@ -44,7 +44,7 @@ jobs:
 
       # —— Symfony 🎵 ——————————————————————————————————————————————————————————
       - name: Check Symfony requirements
-        run: bin/console check:requirements
+        run: symfony check:requirements
 
       - name: Check the Symfony console
         run: |
