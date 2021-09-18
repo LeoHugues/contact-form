@@ -12,11 +12,9 @@ class UserUnitTest extends TestCase
         $user = new User();
 
         $user->setEmail('true@test.com')
-             ->setFirstname('firstname')
              ->setLastname('lastname');
              
         $this->assertTrue($user->getEmail() === 'true@test.com');
-        $this->assertTrue($user->getFirstname() === 'firstname');
         $this->assertTrue($user->getLastname() === 'lastname');
     }
 
@@ -25,11 +23,9 @@ class UserUnitTest extends TestCase
         $user = new User();
 
         $user->setEmail('true@test.com')
-             ->setFirstname('firstname')
              ->setLastname('lastname');
              
         $this->assertFalse($user->getEmail() === 'false@test.com');
-        $this->assertFalse($user->getFirstname() === 'false');
         $this->assertFalse($user->getLastname() === 'false');
     }
 
@@ -38,7 +34,6 @@ class UserUnitTest extends TestCase
         $user = new User();
 
         $this->assertEmpty($user->getEmail());
-        $this->assertEmpty($user->getFirstname());
         $this->assertEmpty($user->getLastname());
     }
 }
