@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ContactRequestRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=ContactRequestRepository::class)
@@ -20,6 +22,7 @@ class ContactRequest
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Posez votre question")
      */
     private $request;
 
@@ -31,6 +34,8 @@ class ContactRequest
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="contactRequests")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Type(type="App\Entity\User")
+     * @Assert\Valid
      */
     private $contactUser;
 
