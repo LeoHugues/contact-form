@@ -49,3 +49,4 @@ php bin/phpunit --testdox
 * Améliorer le processus d'intégration continu
 * Améliorer les tests
 * Générer un fichier Json mieux organisé
+* Mieux organiser le BackOffice
