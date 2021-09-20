@@ -11,6 +11,8 @@ Test Technique ACSEO
 * Symfony CLI
 * Docker
 * Docker-compose
+* node v15.8.0
+* npm 7.5.2
 
 Il est possible de vérifier les prérequis (sauf pour Docker) avec la commande (CLI Symfony) :
 
@@ -29,7 +31,6 @@ symfony serve -d
 symfony console doctrine:migrations:migrate
 ```
 
-
 ### Créer un compte Admin
 
 ```bash
@@ -41,3 +42,10 @@ symfony console app:add-user --admin
 ```bash
 php bin/phpunit --testdox
 ```
+
+### Pistes d'améliorations
+
+* Créer des fixtures
+* Améliorer le processus d'intégration continu
+* Améliorer les tests
+* Générer un fichier Json mieux organisé
