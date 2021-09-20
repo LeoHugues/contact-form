@@ -28,6 +28,12 @@ docker-compose up -d
 symfony serve -d
 ```
 
+### Créer un compte Admin
+
+```bash
+symfony console app:add-user --admin
+```
+
 ### Lancer les tests
 
 ```bash
