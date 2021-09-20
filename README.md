@@ -26,7 +26,9 @@ npm install
 npm run build
 docker-compose up -d
 symfony serve -d
+symfony console doctrine:migrations:migrate
 ```
+
 
 ### Créer un compte Admin
 
