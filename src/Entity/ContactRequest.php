@@ -6,6 +6,8 @@ use App\Repository\ContactRequestRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 
 /**
@@ -21,6 +23,8 @@ class ContactRequest
     private $id;
 
     /**
+     * @Groups({"export"})
+     * 
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Posez votre question")
      */
@@ -32,6 +36,8 @@ class ContactRequest
     private $createDate;
 
     /**
+     * @Groups({"export"})
+     * 
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="contactRequests")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\Type(type="App\Entity\User")
@@ -76,6 +82,14 @@ class ContactRequest
         $this->createDate = $createDate;
 
         return $this;
+    }
+
+    /**
+     * @Groups({"export"})
+     */
+    public function getCreateDateToString() : string
+    {
+        return $this->getCreateDate()->format('y-M-d-H:m:s');
     }
 
     public function getContactUser(): ?User

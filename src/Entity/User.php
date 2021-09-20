@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 
 /**
@@ -25,6 +27,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
+     * @Groups({"export"})
+     * 
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="Saisissez votre e-mail")
      * @Assert\Email(
@@ -45,6 +49,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
+     * @Groups({"export"})
+     * 
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Saisissez votre nom")
      */
@@ -147,18 +153,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(string $firstname): self
-    {
-        $this->firstname = $firstname;
-
-        return $this;
     }
 
     public function getLastname(): ?string
