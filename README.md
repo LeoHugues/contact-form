@@ -14,7 +14,7 @@ Test Technique ACSEO
 * node v15.8.0
 * npm 7.5.2
 
-Il est possible de vérifier les prérequis (sauf pour Docker) avec la commande (CLI Symfony) :
+Il est possible de vérifier les prérequis (sauf pour Docker, node et npm) avec la commande (CLI Symfony) :
 
 ```bash
 symfony check:requirements
